@@ -1,0 +1,41 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: monospace;
+}
+
+.container {
+   margin-top: 10px;
+   width: 100vw;
+   display: flex;
+   gap: 1em;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+}
+
+.tagName {
+   width: 600px;
+   margin-top: 10px;
+   font-size: 3em;
+   font-weight: 1000;
+}
+
+.barContainer {
+   width: 600px;
+   height: 2.6em;
+   position: relative;
+}
+
+.progressBar {
+   background-color: rgb(4, 218, 4);
+   width: 600px;
+   font-size: 2em;
+   border-radius: 1em;
+   position: absolute;
+   top: 0;
+   left: 0;
+   border: 2px solid rgb(44, 44, 44);
+}
