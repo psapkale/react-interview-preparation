@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 type OTPProps = {
    length: number;
@@ -6,7 +6,7 @@ type OTPProps = {
 
 export const OTPModal = ({ length }: OTPProps) => {
    const [otp, setOtp] = useState(new Array(length).fill(""));
-   const inputRef = useRef<HTMLInputElement[] | null>([]);
+   const inputRef = useRef<any>([]);
 
    function handleChange(index: number, e: React.FormEvent<HTMLInputElement>) {
       let value = e.currentTarget.value;
@@ -18,15 +18,27 @@ export const OTPModal = ({ length }: OTPProps) => {
       setOtp(newOpt);
 
       if (value && index < length - 1) {
-         inputRef.current[index + 1]?.focus();
+         // inputRef.current[index + 1]?.focus();
+         inputRef.current[otp.indexOf("")]?.focus();
       }
    }
 
-   function handleKeyDown(index: number, e: React.FormEvent<HTMLInputElement>) {
+   function handleClick(index: number) {
+      if (index > 0 && !otp[index - 1]) {
+         inputRef.current[otp.indexOf("")].focus();
+      }
+      inputRef.current[index].setSelectionRange(1, 1);
+   }
+
+   function handleKeyDown(index: number, e: any) {
       if (e.key === "Backspace" && !otp[index] && index > 0) {
          inputRef.current[index - 1]?.focus();
       }
    }
+
+   useEffect(() => {
+      inputRef.current[0].focus();
+   }, []);
 
    return (
       <div className="otpContainer">
@@ -38,6 +50,7 @@ export const OTPModal = ({ length }: OTPProps) => {
                type="text"
                key={idx}
                onChange={(e) => handleChange(idx, e)}
+               onClick={() => handleClick(idx)}
                onKeyDown={(e) => handleKeyDown(idx, e)}
             />
          ))}
