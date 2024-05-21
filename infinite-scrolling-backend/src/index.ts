@@ -17,7 +17,6 @@ const names = [
 
 app.get("/api/names", (req: Request, res: Response) => {
    const { page } = req.query;
-   console.log(page);
 
    if (!page)
       return res.status(404).json({
