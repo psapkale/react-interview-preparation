@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 
 const app = express();
 app.use(express.json());
@@ -15,11 +15,18 @@ const names = [
    "Rixine",
 ];
 
-app.get("/api/names", (req, res) => {
-   const { page } = req.body;
+app.get("/api/names", (req: Request, res: Response) => {
+   const { page } = req.query;
+   console.log(page);
+
+   if (!page)
+      return res.status(404).json({
+         message: "page not provided",
+      });
+
    const data = [];
 
-   for (let i = 0; i < Math.ceil(Math.random() * names.length - 1); i++) {
+   for (let i = 0; i < 20; i++) {
       const name = names[Math.floor(Math.random() * names.length - 1)];
       if (name) data.push(name);
    }
