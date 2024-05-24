@@ -8,12 +8,14 @@ export const Navbar = () => {
       <nav className="navbar">
          <div>Navbar</div>
          <div className="mode-switch">
-            <input
-               type="checkbox"
-               checked={theme === "dark"}
-               onChange={toggleTheme}
-            />
-            <span className="slider-round"></span>
+            <label>
+               <input
+                  type="checkbox"
+                  checked={theme === "dark"}
+                  onChange={toggleTheme}
+               />
+               <span className="slider round"></span>
+            </label>
          </div>
       </nav>
    );
