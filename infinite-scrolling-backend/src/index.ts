@@ -23,10 +23,11 @@ app.get("/api/names", (req: Request, res: Response) => {
          message: "page not provided",
       });
 
-   const data = [];
+   let data = [];
 
    for (let i = 0; i < 20; i++) {
-      const name = names[Math.floor(Math.random() * names.length - 1)];
+      const randomIndex = Math.floor(Math.random() * names.length - 1);
+      const name = names[randomIndex];
       if (name) data.push(name);
    }
 
@@ -35,6 +36,8 @@ app.get("/api/names", (req: Request, res: Response) => {
          message: "Failed to get names due to some internal error",
       });
    }
+
+   data = data.slice(0, 10);
 
    return res.status(200).json({
       message: "success",
